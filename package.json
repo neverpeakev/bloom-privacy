@@ -1,0 +1,13 @@
+{
+  "name": "flag-explorer-2026",
+  "version": "1.0.0",
+  "description": "Interactive Flag Explorer — World Cup Edition. Color all 48 World Cup 2026 flags, master geography trivia and fill your passport.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "test": "node --test 'tests/*.test.mjs'",
+    "test:e2e": "node tests/e2e.mjs"
+  },
+  "license": "UNLICENSED"
+}
