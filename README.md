@@ -69,6 +69,15 @@ python3 -m http.server 8000   # → http://localhost:8000
 Deploys as-is to Vercel / Netlify / GitHub Pages (`vercel.json` included with
 security headers).
 
+## 📱 App Store / Google Play
+
+The repo ships store-ready Capacitor scaffolding, generated icon & splash assets
+(`resources/`), and a full submission playbook — see **[APPSTORE.md](APPSTORE.md)**.
+
+```bash
+npm install && npm run mobile:init && npm run mobile:ios   # → Xcode (Mac)
+```
+
 ---
 
 *Match data: FIFA World Cup 2026 — 48 teams, 12 groups, 104 matches. Flags are
