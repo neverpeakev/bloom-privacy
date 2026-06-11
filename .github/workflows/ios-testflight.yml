@@ -1,0 +1,53 @@
+name: iOS → TestFlight
+
+# Manual trigger: Actions tab → "iOS → TestFlight" → Run workflow.
+# Requires repository secrets (Settings → Secrets and variables → Actions):
+#   APPLE_TEAM_ID   — developer.apple.com → Membership → Team ID
+#   ASC_KEY_ID      — App Store Connect → Users and Access → Integrations → key ID
+#   ASC_ISSUER_ID   — same page, Issuer ID
+#   ASC_KEY_P8      — full contents of the downloaded AuthKey_XXXX.p8 file
+# One-time prerequisite: create the app record in App Store Connect with
+# bundle ID com.neverpeak.flagexplorer (Apps → + → New App).
+
+on:
+  workflow_dispatch:
+
+jobs:
+  testflight:
+    runs-on: macos-15
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install JS deps & stage web app
+        run: |
+          npm install
+          npm run mobile:stage
+
+      - name: Generate native iOS project
+        run: |
+          npx cap add ios
+          npx cap sync ios
+
+      - name: Generate icons & splash screens
+        run: npx @capacitor/assets generate --ios --iconBackgroundColor '#1d4ed8' --splashBackgroundColor '#1d4ed8'
+
+      - name: Build & upload to TestFlight
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: fastlane ios beta
+
+      - name: Upload IPA artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: flag-explorer-ipa
+          path: build/*.ipa
+          if-no-files-found: ignore

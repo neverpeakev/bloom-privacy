@@ -16,7 +16,29 @@ icon + splash assets (`resources/`), and this checklist. The steps below marked
 > ⏱️ With the World Cup already underway, enroll as **Individual** today and
 > migrate to an Organization later if needed.
 
-## Phase 1 — Build the native projects (any machine with Node; iOS build needs a Mac)
+## ⚡ Fast path — TestFlight without a Mac (GitHub Actions)
+
+The repo ships a one-click CI pipeline (`.github/workflows/ios-testflight.yml`)
+that builds the iOS app on GitHub's macOS runners and uploads it to TestFlight.
+Setup (~10 minutes, once):
+
+1. **App Store Connect → Users and Access → Integrations → App Store Connect API**
+   → Generate API Key (role: **App Manager**). Note the **Key ID** and **Issuer ID**,
+   download the `.p8` file.
+2. **developer.apple.com → Membership** → copy your **Team ID**.
+3. **App Store Connect → Apps → ＋ New App** → platform iOS, bundle ID
+   `com.neverpeak.flagexplorer` (register the bundle ID at
+   developer.apple.com → Identifiers if it's not in the dropdown), SKU `flagexplorer2026`.
+4. **GitHub repo → Settings → Secrets and variables → Actions** → add:
+   `APPLE_TEAM_ID`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, and `ASC_KEY_P8`
+   (paste the entire contents of the `.p8` file).
+5. **Actions tab → "iOS → TestFlight" → Run workflow.** ~15 minutes later the
+   build appears in TestFlight; install it on your phone via the TestFlight app.
+
+From TestFlight, promoting to the public App Store is Phase 3–5 below
+(IAP wiring + listing + review).
+
+## Phase 1 — Build the native projects locally (alternative to the fast path; iOS build needs a Mac)
 
 ```bash
 git clone <repo> && cd <repo>
