@@ -4,11 +4,29 @@
 
 default_platform(:ios)
 
+require "base64"
+
+# Rebuild a clean PEM no matter how the .p8 was pasted into the secret:
+# with real newlines, with literal "\n", flattened onto one line, or as
+# base64 of the whole file. OpenSSL is strict; paste formats are not.
+def normalized_p8(raw)
+  s = raw.strip.gsub('\n', "\n")
+  unless s.include?("BEGIN PRIVATE KEY")
+    decoded = (Base64.decode64(s.gsub(/\s+/, "")) rescue "")
+    s = decoded if decoded.include?("BEGIN PRIVATE KEY")
+  end
+  body = s[/BEGIN PRIVATE KEY-----(.*?)-----END/m, 1]
+  # headerless paste: the secret is just the PEM's base64 body
+  body ||= s if s.gsub(/\s+/, "").match?(%r{\A[A-Za-z0-9+/]+={0,2}\z})
+  UI.user_error!("ASC_KEY_P8 secret doesn't contain a .p8 private key — paste the full contents of the AuthKey_XXXX.p8 file") unless body
+  "-----BEGIN PRIVATE KEY-----\n#{body.gsub(/\s+/, '').scan(/.{1,64}/).join("\n")}\n-----END PRIVATE KEY-----\n"
+end
+
 platform :ios do
   desc "Build and upload to TestFlight"
   lane :beta do
     key_path = File.absolute_path("asc_api_key.p8")
-    File.write(key_path, ENV.fetch("ASC_KEY_P8"))
+    File.write(key_path, normalized_p8(ENV.fetch("ASC_KEY_P8")))
 
     api_key = app_store_connect_api_key(
       key_id: ENV.fetch("ASC_KEY_ID"),
@@ -22,11 +40,6 @@ platform :ios do
       team_id: ENV.fetch("APPLE_TEAM_ID")
     )
 
-    increment_build_number(
-      xcodeproj: "ios/App/App.xcodeproj",
-      build_number: ENV.fetch("GITHUB_RUN_NUMBER", "1")
-    )
-
     build_app(
       workspace: "ios/App/App.xcworkspace",
       scheme: "App",
@@ -36,7 +49,8 @@ platform :ios do
         "-allowProvisioningUpdates",
         "-authenticationKeyPath #{key_path}",
         "-authenticationKeyID #{ENV.fetch('ASC_KEY_ID')}",
-        "-authenticationKeyIssuerID #{ENV.fetch('ASC_ISSUER_ID')}"
+        "-authenticationKeyIssuerID #{ENV.fetch('ASC_ISSUER_ID')}",
+        "CURRENT_PROJECT_VERSION=#{ENV.fetch('GITHUB_RUN_NUMBER', '1')}"
       ].join(" ")
     )
 
