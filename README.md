@@ -1,6 +1,6 @@
-# ⚽🎨 Flag Explorer 2026
+# 🏆⚽🎨 WorldCopa
 
-**Interactive Flag Explorer — World Cup Edition.** *Color your way around the world!*
+**Color the Cup. Learn the World.** (formerly Flag Explorer 2026)
 
 A kid-friendly flag coloring and geography learning web app that turns World Cup 2026
 excitement into learning moments: color all 48 team flags region by region, master

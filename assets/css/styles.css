@@ -70,7 +70,10 @@ body {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px) rotate(20deg); }
 }
-.brand-accent { color: var(--blue-700); }
+.brand-accent {
+  background: linear-gradient(135deg, #f59e0b, #c026d3);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
 .brand-year {
   background: linear-gradient(135deg, var(--sunny-400), var(--sunny-500));
   color: #7c2d12; border-radius: 8px; font-size: 0.72rem;

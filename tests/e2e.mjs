@@ -38,7 +38,7 @@ try {
   // ── Home ────────────────────────────────────────────────────────────
   console.log('▶ Home');
   await page.goto(BASE + '/index.html', { waitUntil: 'networkidle' });
-  check((await page.title()).includes('Flag Explorer 2026'), 'title set');
+  check((await page.title()).includes('WorldCopa'), 'title set');
   check(await page.locator('.hero-title').isVisible(), 'hero renders');
   check(await page.locator('.bottom-nav .nav-item').count() === 5, '5 nav items');
   await shot(page, 'home');

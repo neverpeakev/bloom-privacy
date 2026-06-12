@@ -45,7 +45,7 @@ export function render(root) {
     <section class="card">
       <h2 class="card-title">🏫 For educators</h2>
       <p>
-        Flag Explorer doubles as a geography starter for classrooms: every World Cup
+        WorldCopa doubles as a geography starter for classrooms: every World Cup
         team's flag, capital, language and continent, wrapped in games kids ask to play.
       </p>
       <p>
@@ -65,8 +65,7 @@ export function render(root) {
     <section class="card about-card">
       <h2 class="card-title">ℹ️ About</h2>
       <p>
-        <b>Flag Explorer 2026</b> — Interactive Flag Explorer, World Cup Edition.
-        Color your way around the world! 🌍
+        <b>WorldCopa</b> — Color the Cup. Learn the World. 🌍
       </p>
       <p class="muted">Version 1.0.0 · Made with ⚽ + 🎨</p>
     </section>

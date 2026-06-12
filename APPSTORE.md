@@ -1,4 +1,4 @@
-# 📱 App Store & Google Play Submission Playbook
+# 📱 WorldCopa — App Store & Google Play Submission Playbook
 
 Everything in this repo is store-ready: native project scaffolding (Capacitor),
 icon + splash assets (`resources/`), and this checklist. The steps below marked
@@ -95,13 +95,13 @@ Apple reviews kids' apps strictly. Current state:
 
 ## Phase 5 — App Store listing **[YOU]**
 
-- **Name**: `Flag Explorer 2026 — Flag Coloring & Geography` (30-char display name: `Flag Explorer 2026`)
-- **Subtitle**: `Color flags. Learn the world.`
-- **Keywords**: `flag coloring,world cup,geography,kids games,flags quiz,countries,educational,soccer`
-- **Screenshots**: required sizes 6.9" (1320×2868) and 6.5" (1284×2778). Generate from
-  the live app — run `node tests/e2e.mjs` with a phone-sized viewport, or capture
-  from the Simulator. Show: coloring studio mid-paint, World Cup groups, trivia,
-  passport with badges.
+- **Name**: `WorldCopa: Flag Coloring 2026` (display name: `WorldCopa`) — deliberately avoids "World Cup" verbatim: FIFA enforces its trademark in app names and Apple rejects under rule 5.2.1
+- **Subtitle**: `Color the Cup. Learn the World.`
+- **Keywords**: `flag coloring,world cup,copa,geography,kids games,flags quiz,countries,educational,soccer,2026`
+- **Screenshots**: ready-made 1284×2778 cards live in `store-assets/appstore-*.png` (regenerate anytime with `node scripts/gen-promo.mjs`). Also `store-assets/og.png` for social sharing.
+
+
+
 - **Age rating questionnaire**: everything "None" → expect 4+.
 - **Review notes**: mention the parental gate (and the math answer is whatever the
   two numbers multiply to), and that the app is fully offline with no accounts.

@@ -1,6 +1,6 @@
-/* Flag Explorer 2026 — offline-first service worker. */
+/* WorldCopa — offline-first service worker. */
 
-const CACHE = 'flagexplorer-v1';
+const CACHE = 'worldcopa-v2';
 
 const ASSETS = [
   './',
