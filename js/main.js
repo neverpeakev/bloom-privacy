@@ -48,9 +48,9 @@ function renderShell() {
   document.body.innerHTML = html`
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="topbar">
-      <a class="brand" href="#/home" aria-label="Flag Explorer 2026 home">
-        <span class="brand-ball">⚽</span>
-        <span class="brand-text">Flag<span class="brand-accent">Explorer</span><span class="brand-year">2026</span></span>
+      <a class="brand" href="#/home" aria-label="WorldCopa home">
+        <span class="brand-ball">🏆</span>
+        <span class="brand-text">World<span class="brand-accent">Copa</span><span class="brand-year">2026</span></span>
       </a>
       <div class="topbar-right">
         <span class="chip chip-streak" title="Daily streak">🔥 <b data-streak>${s.streak.count}</b></span>

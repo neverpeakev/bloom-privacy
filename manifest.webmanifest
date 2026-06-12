@@ -1,11 +1,11 @@
 {
-  "name": "Flag Explorer 2026 — World Cup Flag Coloring & Geography Games",
-  "short_name": "FlagExplorer",
-  "description": "Color all 48 World Cup 2026 flags, master geography trivia and fill your passport with stamps.",
+  "name": "WorldCopa — Flag Coloring & World Cup 2026 Trivia",
+  "short_name": "WorldCopa",
+  "description": "Color the Cup. Learn the World. All 48 flags to color, trivia to master and a passport to fill.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#f6f9ff",
-  "theme_color": "#1d4ed8",
+  "theme_color": "#7c3aed",
   "orientation": "portrait-primary",
   "categories": ["education", "kids", "games"],
   "icons": [

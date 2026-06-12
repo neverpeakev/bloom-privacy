@@ -36,20 +36,22 @@ const splashHTML = (bg) => `
     html,body{margin:0;padding:0;width:100%;height:100%}
     body{display:flex;align-items:center;justify-content:center;background:${bg}}
     .wrap{text-align:center}
-    img{width:560px;height:560px;border-radius:120px;box-shadow:0 40px 120px rgba(0,0,0,.25)}
-    h1{font-family:'Segoe UI',system-ui,sans-serif;font-size:84px;letter-spacing:-2px;margin:60px 0 0;color:#fff}
-    h1 .y{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#7c2d12;border-radius:24px;padding:4px 24px;font-size:64px;vertical-align:middle;margin-left:16px}
+    img{width:560px;height:560px;border-radius:120px;box-shadow:0 40px 120px rgba(0,0,0,.35)}
+    h1{font-family:'Segoe UI',system-ui,sans-serif;font-size:120px;letter-spacing:-3px;margin:64px 0 0;color:#fff;font-weight:900}
+    h1 .copa{background:linear-gradient(135deg,#fde68a,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+    p{font-family:'Segoe UI',system-ui,sans-serif;font-size:44px;color:#e0e7ff;margin:18px 0 0;font-weight:600;letter-spacing:1px}
   </style>
   <div class="wrap">
     <img src="${svgData}" />
-    <h1>Flag Explorer<span class="y">2026</span></h1>
+    <h1>World<span class="copa">Copa</span></h1>
+    <p>Color the Cup. Learn the World. ⚽🎨</p>
   </div>
 `;
 
 await shoot({ width: 1024, height: 1024, html: iconHTML, out: 'resources/icon-only.png' });
 await shoot({
   width: 2732, height: 2732,
-  html: splashHTML('linear-gradient(160deg,#3b82f6,#1d4ed8 60%,#0f2a6b)'),
+  html: splashHTML('linear-gradient(160deg,#4f46e5,#7c3aed 55%,#c026d3)'),
   out: 'resources/splash.png',
 });
 await shoot({

@@ -1,20 +1,56 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#3b82f6"/>
-      <stop offset="1" stop-color="#1d4ed8"/>
+      <stop offset="0" stop-color="#4f46e5"/>
+      <stop offset="0.55" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#c026d3"/>
     </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fde68a"/>
+      <stop offset="0.5" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="goldDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#d97706"/>
+    </linearGradient>
+    <clipPath id="bowlClip">
+      <path d="M37,35 h54 c0,20 -10,31 -27,31 c-17,0 -27,-11 -27,-31 Z"/>
+    </clipPath>
   </defs>
+
   <rect width="128" height="128" rx="28" fill="url(#bg)"/>
-  <!-- flag pole -->
-  <rect x="30" y="22" width="6" height="84" rx="3" fill="#fde68a"/>
-  <!-- waving tricolor flag -->
-  <path d="M36 26 C56 18, 76 34, 100 26 L100 42 C76 50, 56 34, 36 42 Z" fill="#ef4444"/>
-  <path d="M36 42 C56 34, 76 50, 100 42 L100 58 C76 66, 56 50, 36 58 Z" fill="#ffffff"/>
-  <path d="M36 58 C56 50, 76 66, 100 58 L100 74 C76 82, 56 66, 36 74 Z" fill="#22c55e"/>
-  <!-- soccer ball -->
-  <circle cx="88" cy="96" r="22" fill="#ffffff"/>
-  <path d="M88 84 l8 6 -3 9 h-10 l-3 -9 Z" fill="#0f172a"/>
-  <path d="M88 74 l4 6 -4 4 -4 -4 Z M70 92 l7 1 1 6 -6 3 Z M106 92 l-7 1 -1 6 6 3 Z M78 113 l3 -6 7 1 1 7 Z M98 113 l-3 -6 -7 1 -1 7 Z" fill="#0f172a"/>
-  <circle cx="88" cy="96" r="22" fill="none" stroke="#0f172a" stroke-width="3"/>
+
+  <!-- sparkles -->
+  <path d="M22,22 l2.4,5.6 5.6,2.4 -5.6,2.4 -2.4,5.6 -2.4,-5.6 -5.6,-2.4 5.6,-2.4 Z" fill="#ffffff" opacity="0.95"/>
+  <path d="M106,30 l1.8,4.2 4.2,1.8 -4.2,1.8 -1.8,4.2 -1.8,-4.2 -4.2,-1.8 4.2,-1.8 Z" fill="#fde68a" opacity="0.95"/>
+  <path d="M18,74 l1.6,3.8 3.8,1.6 -3.8,1.6 -1.6,3.8 -1.6,-3.8 -3.8,-1.6 3.8,-1.6 Z" fill="#ffffff" opacity="0.8"/>
+
+  <!-- trophy handles -->
+  <path d="M32,32 C16,32 14,56 36,61" fill="none" stroke="url(#goldDark)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M96,32 C112,32 114,56 92,61" fill="none" stroke="url(#goldDark)" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- trophy bowl -->
+  <path d="M31,26 h66 v8 c0,25 -13,38 -33,38 c-20,0 -33,-13 -33,-38 Z" fill="url(#gold)"/>
+
+  <!-- waving flag stripes inside the bowl (the 'flags' in the cup) -->
+  <g clip-path="url(#bowlClip)">
+    <path d="M30,35 q14,-5 28,0 t28,0 v9 q-14,5 -28,0 t-28,0 Z" fill="#ef4444"/>
+    <path d="M30,44 q14,-5 28,0 t28,0 v9 q-14,5 -28,0 t-28,0 Z" fill="#ffffff"/>
+    <path d="M30,53 q14,-5 28,0 t28,0 v9 q-14,5 -28,0 t-28,0 Z" fill="#22c55e"/>
+    <path d="M30,62 q14,-5 28,0 t28,0 v9 q-14,5 -28,0 t-28,0 Z" fill="#3b82f6"/>
+  </g>
+  <path d="M31,26 h66 v8 c0,25 -13,38 -33,38 c-20,0 -33,-13 -33,-38 Z" fill="none" stroke="#d97706" stroke-width="2.5"/>
+
+  <!-- stem, collar and base -->
+  <path d="M58,71 h12 v13 h-12 Z" fill="url(#goldDark)"/>
+  <rect x="50" y="84" width="28" height="7" rx="3" fill="url(#gold)"/>
+  <rect x="42" y="91" width="44" height="9" rx="3.5" fill="url(#goldDark)"/>
+  <rect x="36" y="100" width="56" height="10" rx="4" fill="#b45309"/>
+
+  <!-- soccer ball sidekick -->
+  <circle cx="99" cy="99" r="16" fill="#ffffff"/>
+  <path d="M99,90 l6.5,4.7 -2.5,7.6 h-8 l-2.5,-7.6 Z" fill="#0f172a"/>
+  <path d="M99,83.5 l3,4.2 -3,2.8 -3,-2.8 Z M86,96 l5,0.8 0.8,4.4 -4.4,2.2 Z M112,96 l-5,0.8 -0.8,4.4 4.4,2.2 Z M91.5,112 l2.2,-4.4 5.2,0.8 0.8,5 Z M106.5,112 l-2.2,-4.4 -5.2,0.8 -0.8,5 Z" fill="#0f172a"/>
+  <circle cx="99" cy="99" r="16" fill="none" stroke="#0f172a" stroke-width="2.5"/>
 </svg>

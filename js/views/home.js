@@ -48,9 +48,9 @@ export function render(root) {
           ${raw(featured.map((t) => `<span class="hero-flag-chip" style="animation-delay:${Math.random() * 2}s">${esc(t.emoji)}</span>`).join(''))}
         </div>
       </div>
-      <h1 class="hero-title">Color your way <span class="hero-rainbow">around the world!</span></h1>
+      <h1 class="hero-title">Color the Cup. <span class="hero-rainbow">Learn the World.</span></h1>
       <p class="hero-sub">
-        The World Cup is here — color all 48 team flags, master trivia,
+        The Cup is here — color all 48 team flags, crush the trivia,
         and stamp your passport one country at a time. ⚽🎨
       </p>
       <div class="hero-cta">
