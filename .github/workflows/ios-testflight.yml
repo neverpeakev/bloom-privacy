@@ -55,7 +55,7 @@ jobs:
           done
           case "$ASC_KEY_P8" in
             *"BEGIN PRIVATE KEY"*) echo "✅ ASC_KEY_P8 contains a PEM private key header";;
-            *) echo "❌ ASC_KEY_P8 does not look like a .p8 file — open AuthKey_XXXX.p8 in a text editor and paste its FULL contents (starts with -----BEGIN PRIVATE KEY-----)"; ok=0;;
+            *) echo "ℹ️ ASC_KEY_P8 has no PEM header — fastlane will wrap the base64 body automatically";;
           esac
           [ "$ok" = "1" ] || exit 1
 
