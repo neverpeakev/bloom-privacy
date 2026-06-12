@@ -36,6 +36,29 @@ jobs:
       - name: Generate icons & splash screens
         run: npx @capacitor/assets generate --ios --iconBackgroundColor '#1d4ed8' --splashBackgroundColor '#1d4ed8'
 
+      - name: Sanity-check secrets (lengths only, values never printed)
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: |
+          ok=1
+          for v in APPLE_TEAM_ID ASC_KEY_ID ASC_ISSUER_ID ASC_KEY_P8; do
+            val="${!v}"
+            if [ -z "$val" ]; then
+              echo "❌ $v is EMPTY or not set — check the secret name spelling in repo Settings → Secrets → Actions"
+              ok=0
+            else
+              echo "✅ $v present (length ${#val})"
+            fi
+          done
+          case "$ASC_KEY_P8" in
+            *"BEGIN PRIVATE KEY"*) echo "✅ ASC_KEY_P8 contains a PEM private key header";;
+            *) echo "❌ ASC_KEY_P8 does not look like a .p8 file — open AuthKey_XXXX.p8 in a text editor and paste its FULL contents (starts with -----BEGIN PRIVATE KEY-----)"; ok=0;;
+          esac
+          [ "$ok" = "1" ] || exit 1
+
       - name: Build & upload to TestFlight
         env:
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
