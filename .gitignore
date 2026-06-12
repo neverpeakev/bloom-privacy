@@ -1,0 +1,7 @@
+node_modules/
+.screenshots/
+.vercel/
+*.log
+dist/
+ios/
+android/

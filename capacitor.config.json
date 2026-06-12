@@ -1,0 +1,21 @@
+{
+  "appId": "com.neverpeak.flagexplorer",
+  "appName": "Flag Explorer 2026",
+  "webDir": "dist",
+  "ios": {
+    "contentInset": "automatic",
+    "backgroundColor": "#f6f9ff"
+  },
+  "android": {
+    "backgroundColor": "#f6f9ff"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "launchShowDuration": 1200,
+      "backgroundColor": "#1d4ed8",
+      "splashFullScreen": true,
+      "splashImmersive": true
+    }
+  }
+}

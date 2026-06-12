@@ -1,0 +1,2 @@
+app_identifier("com.neverpeak.flagexplorer")
+team_id(ENV["APPLE_TEAM_ID"])
