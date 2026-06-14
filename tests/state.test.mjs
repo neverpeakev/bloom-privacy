@@ -90,6 +90,18 @@ test('plan gating: free → trial → paid', () => {
   assert.throws(() => setPlan('bogus', s));
 });
 
+test('native store entitlement unlocks Pro regardless of plan/trial', () => {
+  const s = defaultState();
+  const now = Date.now();
+  assert.equal(isPro(s, now), false);
+  assert.equal(isFlagUnlocked('UZB', s, now), false);
+  s.entitled = true; // RevenueCat "pro" entitlement active
+  assert.equal(isPro(s, now), true);
+  assert.equal(isFlagUnlocked('UZB', s, now), true);
+  s.entitled = false;
+  assert.equal(isPro(s, now), false, 'lapsed entitlement re-locks Pro content');
+});
+
 test('starting a trial twice keeps the original start date', () => {
   const s = defaultState();
   startTrial(s, 1000);

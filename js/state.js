@@ -20,6 +20,7 @@ export function defaultState(now = Date.now()) {
   return {
     createdAt: now,
     plan: 'free',
+    entitled: false, // native: true when a RevenueCat "pro" entitlement is active
     trialStartedAt: null,
     stars: 0,
     streak: { count: 0, lastDay: null },
@@ -104,6 +105,7 @@ export function touchStreak(s = get(), today = new Date()) {
 // ── Plan gating ────────────────────────────────────────────────────────
 
 export function isPro(s = get(), now = Date.now()) {
+  if (s.entitled) return true; // native store entitlement (RevenueCat "pro")
   if (s.plan !== 'free') return true;
   if (s.trialStartedAt && now - s.trialStartedAt < TRIAL_DAYS * 86400000) return true;
   return false;

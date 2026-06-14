@@ -37,6 +37,17 @@ jobs:
           npm install
           npm run mobile:stage
 
+      - name: Bundle native in-app-purchases (RevenueCat)
+        env:
+          REVENUECAT_IOS_KEY: ${{ secrets.REVENUECAT_IOS_KEY }}
+        run: |
+          if [ -z "$REVENUECAT_IOS_KEY" ]; then
+            echo "❌ REVENUECAT_IOS_KEY secret is not set — add the RevenueCat Apple public key (appl_…)."
+            exit 1
+          fi
+          npm run mobile:iap
+          test -s dist/native-iap.bundle.js && echo "✅ native-iap.bundle.js built"
+
       - name: Generate native iOS project
         run: |
           npx cap add ios

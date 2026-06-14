@@ -5,6 +5,7 @@
 import { get, load, save, subscribe, touchStreak, isPro, trialDaysLeft, evaluateBadges } from './state.js';
 import { html, raw, toast, showBadges } from './ui.js';
 import { sfx } from './audio.js';
+import { initBilling } from './billing.js';
 
 import * as home from './views/home.js';
 import * as color from './views/color.js';
@@ -144,6 +145,14 @@ function init() {
   if ('serviceWorker' in navigator && location.protocol === 'https:') {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   }
+
+  // Native builds: configure RevenueCat and refresh entitlement, then repaint
+  // the current view so any gated content reflects an active subscription.
+  initBilling()
+    .then(() => {
+      if (isPro()) route();
+    })
+    .catch(() => {});
 }
 
 init();
