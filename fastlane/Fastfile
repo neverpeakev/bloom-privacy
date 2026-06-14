@@ -11,13 +11,14 @@ require "base64"
 # base64 of the whole file. OpenSSL is strict; paste formats are not.
 def normalized_p8(raw)
   s = raw.strip.gsub('\n', "\n")
+  compact = s.gsub(/\s+/, "")               # whitespace-free form, reused below
   unless s.include?("BEGIN PRIVATE KEY")
-    decoded = (Base64.decode64(s.gsub(/\s+/, "")) rescue "")
+    decoded = (Base64.decode64(compact) rescue "")
     s = decoded if decoded.include?("BEGIN PRIVATE KEY")
   end
   body = s[/BEGIN PRIVATE KEY-----(.*?)-----END/m, 1]
   # headerless paste: the secret is just the PEM's base64 body
-  body ||= s if s.gsub(/\s+/, "").match?(%r{\A[A-Za-z0-9+/]+={0,2}\z})
+  body ||= s if compact.match?(%r{\A[A-Za-z0-9+/]+={0,2}\z})
   UI.user_error!("ASC_KEY_P8 secret doesn't contain a .p8 private key — paste the full contents of the AuthKey_XXXX.p8 file") unless body
   "-----BEGIN PRIVATE KEY-----\n#{body.gsub(/\s+/, '').scan(/.{1,64}/).join("\n")}\n-----END PRIVATE KEY-----\n"
 end
