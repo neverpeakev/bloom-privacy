@@ -164,7 +164,7 @@ const cards = [
     emojis: ['🧠', '🌍', '🎮', '🥇'],
   },
 ];
-for (const c of cards) await compose({ out: c.out, w: 1284, h: 2778, html: card(c) });
+for (const c of cards) await compose({ out: c.out, w: 1290, h: 2796, html: card(c) });
 
 // ── 3. Social OG image (1200×630) ──────────────────────────────────────
 console.log('▶ Composing OG image');

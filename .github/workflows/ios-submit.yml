@@ -1,0 +1,26 @@
+name: iOS → Submit for Review
+
+# Uploads App Store listing metadata + screenshots, attaches the latest
+# TestFlight build, and submits for review. Run AFTER a build from the
+# "iOS → TestFlight" workflow has finished processing in App Store Connect.
+#
+# Requires the same secrets as the build workflow: APPLE_TEAM_ID, ASC_KEY_ID,
+# ASC_ISSUER_ID, ASC_KEY_P8.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload metadata + screenshots and submit for review
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: fastlane ios release
