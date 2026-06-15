@@ -9,22 +9,25 @@
     "test": "node --test 'tests/*.test.mjs'",
     "test:e2e": "node tests/e2e.mjs",
     "mobile:stage": "bash scripts/build-mobile.sh",
+    "mobile:iap": "esbuild src/native-iap.js --bundle --format=iife --outfile=dist/native-iap.bundle.js --define:__RC_KEY__=\"\\\"${REVENUECAT_IOS_KEY:-}\\\"\"",
     "mobile:assets": "node scripts/gen-assets.mjs && npx @capacitor/assets generate --iconBackgroundColor '#1d4ed8' --splashBackgroundColor '#1d4ed8'",
-    "mobile:init": "npm run mobile:stage && npx cap add ios && npx cap add android",
-    "mobile:sync": "npm run mobile:stage && npx cap sync",
+    "mobile:init": "npm run mobile:stage && npm run mobile:iap && npx cap add ios && npx cap add android",
+    "mobile:sync": "npm run mobile:stage && npm run mobile:iap && npx cap sync",
     "mobile:ios": "npm run mobile:sync && npx cap open ios",
     "mobile:android": "npm run mobile:sync && npx cap open android"
   },
   "devDependencies": {
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^7.0.0",
+    "esbuild": "^0.24.0",
     "playwright": "^1.56.1"
   },
   "dependencies": {
     "@capacitor/android": "^7.0.0",
     "@capacitor/core": "^7.0.0",
     "@capacitor/ios": "^7.0.0",
-    "@capacitor/splash-screen": "^7.0.0"
+    "@capacitor/splash-screen": "^7.0.0",
+    "@revenuecat/purchases-capacitor": "^10.0.0"
   },
   "license": "UNLICENSED"
 }
