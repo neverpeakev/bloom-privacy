@@ -5,6 +5,7 @@ import { html, raw } from './ui.js';
 
 import * as home from './views/home.js';
 import * as scanCamera from './views/scan-camera.js';
+import * as fullsweep from './views/fullsweep.js';
 import * as sweep from './views/sweep.js';
 import * as learn from './views/learn.js';
 import * as sensors from './views/sensors.js';
@@ -18,6 +19,7 @@ const ROUTES = [
   { pattern: /^#?\/?$/, view: home, nav: 'home' },
   { pattern: /^#\/home$/, view: home, nav: 'home' },
   { pattern: /^#\/scan$/, view: scanCamera, nav: 'scan' },
+  { pattern: /^#\/fullsweep$/, view: fullsweep, nav: 'home' },
   { pattern: /^#\/sweep$/, view: sweep, nav: 'sweep' },
   { pattern: /^#\/sweep\/([a-z]+)$/, view: sweep, nav: 'sweep' },
   { pattern: /^#\/learn$/, view: learn, nav: 'learn' },
