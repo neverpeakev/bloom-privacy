@@ -16,7 +16,8 @@ export function render(root) {
       <div class="hero-radar">${raw(radarSVG())}</div>
       <h1 class="hero-title">Is someone <span class="accent">watching?</span></h1>
       <p class="hero-sub">Sweep any room for hidden cameras, microphones and Bluetooth trackers — before you unpack. Honest tools, no fake "RF detector" gimmicks.</p>
-      <a class="btn btn-primary btn-lg" href="#/sweep/arrival">▶ Start a 5-minute sweep</a>
+      <a class="btn btn-primary btn-lg" href="#/fullsweep">🛰️ Run Full Sweep</a>
+      <div style="margin-top:10px"><a class="card-link" href="#/sweep/arrival">or follow the manual checklist →</a></div>
     </section>
 
     <h2 class="section-title">Detection tools</h2>

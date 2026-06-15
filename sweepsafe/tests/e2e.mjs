@@ -71,6 +71,20 @@ try {
   check((await page.locator('.signal-flag').count()) >= 1, 'tracker radar flags a possible tracker');
   await shot(page, 'tracker');
 
+  console.log('▶ Full Sweep flow (demo data)');
+  await page.goto(BASE + '/index.html?demo=1#/fullsweep', { waitUntil: 'networkidle' });
+  await page.locator('[data-next]').click();                 // Begin → camera
+  await page.waitForSelector('[data-vid], .notice');
+  await page.locator('[data-next]').click();                 // Done scanning → tracker
+  await page.waitForTimeout(1600);
+  await page.locator('[data-next]').click();                 // → magnet
+  await page.waitForTimeout(800);
+  await page.locator('[data-next]').click();                 // → checklist
+  await page.locator('[data-next]').click();                 // → results
+  await page.waitForFunction(() => /complete|attention/i.test(document.querySelector('.page-head h1')?.textContent || ''), { timeout: 6000 });
+  check(true, 'Full Sweep reaches the results screen');
+  await shot(page, 'fullsweep-results');
+
   console.log('▶ Findings log');
   await page.goto(BASE + '/index.html#/more', { waitUntil: 'networkidle' });
   check((await page.locator('.signal-row').count()) >= 1, 'logged finding appears in More');
