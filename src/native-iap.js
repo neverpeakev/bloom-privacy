@@ -11,15 +11,15 @@
  * time by esbuild's --define (__RC_KEY__) from the REVENUECAT_IOS_KEY secret.
  *
  * RevenueCat dashboard contract (set up by the project owner):
- *   • entitlement identifier:  "pro"
- *   • offering identifier:      "default"  (current offering)
- *   • the 3 subscription products are attached to both.
+ *   • offering identifier:  "default"  (current offering)
+ *   • one entitlement (any identifier) that all paid products grant.
+ *     We treat "any active entitlement" as Pro, so the entitlement can be
+ *     named anything ("WorldCopa Pro", "pro", …) without code changes.
  */
 
 import { Purchases, LOG_LEVEL } from '@revenuecat/purchases-capacitor';
 
 const RC_KEY = typeof __RC_KEY__ !== 'undefined' ? __RC_KEY__ : '';
-const ENTITLEMENT = 'pro';
 
 let configured = false;
 
@@ -31,8 +31,10 @@ async function ensureConfigured() {
   configured = true;
 }
 
+// Any active entitlement = Pro. One entitlement guards all content, so we
+// don't couple the app to its exact identifier.
 function entitled(customerInfo) {
-  return !!customerInfo?.entitlements?.active?.[ENTITLEMENT];
+  return Object.keys(customerInfo?.entitlements?.active || {}).length > 0;
 }
 
 window.__WORLDCOPA_RC__ = {
