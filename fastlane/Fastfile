@@ -114,3 +114,23 @@ platform :ios do
     )
   end
 end
+
+platform :ios do
+  desc "Print the current App Store review status"
+  lane :status do
+    key_path = File.absolute_path("asc_api_key.p8")
+    File.write(key_path, normalized_p8(ENV.fetch("ASC_KEY_P8")))
+    app_store_connect_api_key(
+      key_id: ENV.fetch("ASC_KEY_ID"),
+      issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+      key_filepath: key_path,
+      set_spaceship_token: true
+    )
+    app = Spaceship::ConnectAPI::App.find("com.neverpeak.flagexplorer")
+    UI.user_error!("App not found") unless app
+    versions = app.get_app_store_versions(filter: { platform: "IOS" })
+    versions.sort_by(&:version_string).each do |v|
+      UI.message("WORLDCOPA_STATUS version=#{v.version_string} state=#{v.app_store_state}")
+    end
+  end
+end

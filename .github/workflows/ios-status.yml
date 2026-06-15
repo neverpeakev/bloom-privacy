@@ -1,0 +1,19 @@
+name: iOS → Review Status
+
+# On-demand check of the App Store review state (uses the ASC API key).
+on:
+  workflow_dispatch:
+
+jobs:
+  status:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check App Store review status
+        env:
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: fastlane ios status
