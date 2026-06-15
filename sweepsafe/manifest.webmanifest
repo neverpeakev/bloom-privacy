@@ -1,0 +1,14 @@
+{
+  "name": "SweepSafe — Hidden Camera & Tracker Detector",
+  "short_name": "SweepSafe",
+  "description": "Sweep any room for hidden cameras, microphones and Bluetooth trackers before you settle in.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "orientation": "portrait-primary",
+  "categories": ["utilities", "travel", "lifestyle"],
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

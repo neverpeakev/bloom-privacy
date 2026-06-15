@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0e7490"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="42%" r="55%">
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+  <rect width="128" height="128" rx="28" fill="url(#glow)"/>
+  <!-- shield -->
+  <path d="M64 18l34 13v24c0 22-15 36-34 47-19-11-34-25-34-47V31l34-13z" fill="#15203a" stroke="#22d3ee" stroke-width="3"/>
+  <!-- radar rings -->
+  <circle cx="64" cy="58" r="26" fill="none" stroke="#22d3ee" stroke-width="2.5" opacity="0.55"/>
+  <circle cx="64" cy="58" r="15" fill="none" stroke="#22d3ee" stroke-width="2.5" opacity="0.8"/>
+  <!-- lens center -->
+  <circle cx="64" cy="58" r="6" fill="#22d3ee"/>
+  <circle cx="64" cy="58" r="2.5" fill="#04121a"/>
+  <!-- sweep line -->
+  <line x1="64" y1="58" x2="64" y2="30" stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
+  <!-- detected blip -->
+  <circle cx="82" cy="46" r="3.5" fill="#f87171"/>
+</svg>
