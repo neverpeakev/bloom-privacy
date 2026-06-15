@@ -8,6 +8,9 @@ import * as scanCamera from './views/scan-camera.js';
 import * as sweep from './views/sweep.js';
 import * as learn from './views/learn.js';
 import * as sensors from './views/sensors.js';
+import * as magnetometer from './views/magnetometer.js';
+import * as tracker from './views/tracker.js';
+import * as network from './views/network.js';
 import * as more from './views/more.js';
 import * as premium from './views/premium.js';
 
@@ -19,6 +22,9 @@ const ROUTES = [
   { pattern: /^#\/sweep\/([a-z]+)$/, view: sweep, nav: 'sweep' },
   { pattern: /^#\/learn$/, view: learn, nav: 'learn' },
   { pattern: /^#\/sensors$/, view: sensors, nav: null },
+  { pattern: /^#\/tool\/magnetometer$/, view: magnetometer, nav: null },
+  { pattern: /^#\/tool\/tracker$/, view: tracker, nav: null },
+  { pattern: /^#\/tool\/network$/, view: network, nav: null },
   { pattern: /^#\/more$/, view: more, nav: 'more' },
   { pattern: /^#\/premium$/, view: premium, nav: null },
 ];

@@ -3,9 +3,10 @@ const CACHE = 'sweepsafe-v1';
 const ASSETS = [
   './', './index.html', './manifest.webmanifest', './assets/icon.svg', './assets/css/styles.css',
   './js/main.js', './js/state.js', './js/ui.js', './js/billing.js',
-  './js/data/sweep.js',
+  './js/native.js', './js/sensor-logic.js', './js/data/sweep.js',
   './js/views/home.js', './js/views/scan-camera.js', './js/views/sweep.js',
-  './js/views/learn.js', './js/views/sensors.js', './js/views/more.js', './js/views/premium.js',
+  './js/views/learn.js', './js/views/sensors.js', './js/views/magnetometer.js',
+  './js/views/tracker.js', './js/views/network.js', './js/views/more.js', './js/views/premium.js',
 ];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== CACHE).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
