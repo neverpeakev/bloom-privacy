@@ -90,4 +90,27 @@ platform :ios do
       }
     )
   end
+
+  desc "Upload screenshots only (skips metadata to dodge fastlane's first-version 'No data' bug)"
+  lane :screenshots do
+    key_path = File.absolute_path("asc_api_key.p8")
+    File.write(key_path, normalized_p8(ENV.fetch("ASC_KEY_P8")))
+
+    api_key = app_store_connect_api_key(
+      key_id: ENV.fetch("ASC_KEY_ID"),
+      issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+      key_filepath: key_path
+    )
+
+    deliver(
+      api_key: api_key,
+      force: true,
+      skip_binary_upload: true,
+      skip_metadata: true,               # avoids the review_attachment crash
+      skip_screenshots: false,
+      overwrite_screenshots: true,
+      run_precheck_before_submit: false,
+      submit_for_review: false
+    )
+  end
 end

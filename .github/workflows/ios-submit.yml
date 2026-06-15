@@ -9,6 +9,14 @@ name: iOS → Submit for Review
 
 on:
   workflow_dispatch:
+    inputs:
+      lane:
+        description: 'fastlane lane: release (full submit) or screenshots (upload screenshots only)'
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - screenshots
 
 jobs:
   submit:
@@ -23,4 +31,4 @@ jobs:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-        run: fastlane ios release
+        run: fastlane ios ${{ inputs.lane || 'release' }}
