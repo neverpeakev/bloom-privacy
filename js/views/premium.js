@@ -16,7 +16,6 @@ import { celebrate } from '../confetti.js';
 import { sfx } from '../audio.js';
 import { billingMode, getPackages, purchase, restore } from '../billing.js';
 
-const NATIVE = billingMode() === 'native';
 const EULA_URL = 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';
 const PRIVACY_URL = 'privacy.html';
 
@@ -212,6 +211,7 @@ function renderWeb(root, s) {
 
 export function render(root) {
   const s = get();
-  if (NATIVE) renderNative(root, s);
+  // Decide at render time — the native bridge isn't ready at module import.
+  if (billingMode() === 'native') renderNative(root, s);
   else renderWeb(root, s);
 }
