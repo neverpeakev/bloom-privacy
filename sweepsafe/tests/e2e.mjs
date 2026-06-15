@@ -57,6 +57,21 @@ try {
   check(await page.locator('.scanner-video.fx-ir').count() === 1, 'IR mode switches filter');
   await page.locator('[data-found]').click();
   await shot(page, 'scanner');
+  console.log('▶ Magnetometer (demo data)');
+  await page.goto(BASE + '/index.html?demo=1#/tool/magnetometer', { waitUntil: 'networkidle' });
+  await page.waitForSelector('.meter-value');
+  await page.waitForFunction(() => { const v = document.querySelector('.meter-value'); return v && v.textContent && v.textContent !== '––'; }, { timeout: 6000 });
+  check(true, 'magnetometer meter shows live readings');
+  await shot(page, 'magnetometer');
+
+  console.log('▶ Tracker radar (demo data)');
+  await page.goto(BASE + '/index.html?demo=1#/tool/tracker', { waitUntil: 'networkidle' });
+  await page.waitForSelector('.signal-row', { timeout: 6000 });
+  await page.waitForFunction(() => document.querySelectorAll('.signal-flag').length > 0, { timeout: 6000 });
+  check((await page.locator('.signal-flag').count()) >= 1, 'tracker radar flags a possible tracker');
+  await shot(page, 'tracker');
+
+  console.log('▶ Findings log');
   await page.goto(BASE + '/index.html#/more', { waitUntil: 'networkidle' });
   check((await page.locator('.signal-row').count()) >= 1, 'logged finding appears in More');
 
