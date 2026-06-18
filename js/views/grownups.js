@@ -45,7 +45,7 @@ export function render(root) {
     <section class="card">
       <h2 class="card-title">🏫 For educators</h2>
       <p>
-        WorldCopa doubles as a geography starter for classrooms: every World Cup
+        WorldCopa doubles as a geography starter for classrooms: every national
         team's flag, capital, language and continent, wrapped in games kids ask to play.
       </p>
       <p>
@@ -67,7 +67,12 @@ export function render(root) {
       <p>
         <b>WorldCopa</b> — Color the Cup. Learn the World. 🌍
       </p>
-      <p class="muted">Version 1.0.0 · Made with ⚽ + 🎨</p>
+      <p class="muted">Version 1.0.1 · Made with ⚽ + 🎨</p>
+      <p class="muted" style="font-size:0.8rem;margin-top:8px">
+        WorldCopa is an independent educational game. It is not affiliated with,
+        endorsed by, or sponsored by FIFA or any tournament organizer. National
+        flags are in the public domain; match dates shown are publicly available facts.
+      </p>
     </section>
   `;
 

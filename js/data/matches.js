@@ -1,5 +1,5 @@
 /**
- * Official FIFA World Cup 2026 match schedule — all 104 matches.
+ * 2026 international match fixture calendar — 104 public match dates. Not affiliated with, endorsed by, or sponsored by FIFA or any tournament organizer.
  * Compact rows: [matchNumber, home, away, stage, group, kickoffISO, venue, city, placeholder]
  * Knockout rows have null teams and a human-readable placeholder instead.
  */

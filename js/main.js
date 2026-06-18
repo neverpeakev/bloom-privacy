@@ -38,7 +38,7 @@ const NAV = [
   { id: 'home', href: '#/home', emoji: '🏠', label: 'Home' },
   { id: 'color', href: '#/color', emoji: '🎨', label: 'Color' },
   { id: 'games', href: '#/games', emoji: '🎮', label: 'Games' },
-  { id: 'worldcup', href: '#/worldcup', emoji: '⚽', label: 'World Cup' },
+  { id: 'worldcup', href: '#/worldcup', emoji: '⚽', label: 'Soccer' },
   { id: 'passport', href: '#/passport', emoji: '🛂', label: 'Passport' },
 ];
 
@@ -51,7 +51,7 @@ function renderShell() {
     <header class="topbar">
       <a class="brand" href="#/home" aria-label="WorldCopa home">
         <span class="brand-ball">🏆</span>
-        <span class="brand-text">World<span class="brand-accent">Copa</span><span class="brand-year">2026</span></span>
+        <span class="brand-text">World<span class="brand-accent">Copa</span></span>
       </a>
       <div class="topbar-right">
         <span class="chip chip-streak" title="Daily streak">🔥 <b data-streak>${s.streak.count}</b></span>

@@ -75,7 +75,7 @@ const GENERATORS = [
     const wrong = sample(groups.filter((g) => g !== team.group), 3, rng);
     return {
       kind: 'group',
-      text: `⚽ Which World Cup 2026 group is ${team.name} ${team.emoji} playing in?`,
+      text: `⚽ Which 2026 group is ${team.name} ${team.emoji} playing in?`,
       answer: `Group ${team.group}`,
       options: shuffled([`Group ${team.group}`, ...wrong.map((g) => `Group ${g}`)], rng),
       explain: `${team.name} plays in Group ${team.group}. ${team.soccer}`,
