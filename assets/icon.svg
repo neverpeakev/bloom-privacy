@@ -24,22 +24,22 @@
   <!-- sparkles -->
   <path d="M22,22 l2.4,5.6 5.6,2.4 -5.6,2.4 -2.4,5.6 -2.4,-5.6 -5.6,-2.4 5.6,-2.4 Z" fill="#ffffff" opacity="0.95"/>
   <path d="M106,30 l1.8,4.2 4.2,1.8 -4.2,1.8 -1.8,4.2 -1.8,-4.2 -4.2,-1.8 4.2,-1.8 Z" fill="#fde68a" opacity="0.95"/>
-  <path d="M18,74 l1.6,3.8 3.8,1.6 -3.8,1.6 -1.6,3.8 -1.6,-3.8 -3.8,-1.6 3.8,-1.6 Z" fill="#ffffff" opacity="0.8"/>
 
   <!-- trophy handles -->
   <path d="M32,32 C16,32 14,56 36,61" fill="none" stroke="url(#goldDark)" stroke-width="7" stroke-linecap="round"/>
   <path d="M96,32 C112,32 114,56 92,61" fill="none" stroke="url(#goldDark)" stroke-width="7" stroke-linecap="round"/>
 
-  <!-- trophy bowl -->
+  <!-- trophy bowl rim/base in gold -->
   <path d="M31,26 h66 v8 c0,25 -13,38 -33,38 c-20,0 -33,-13 -33,-38 Z" fill="url(#gold)"/>
 
-  <!-- waving flag stripes inside the bowl (the 'flags' in the cup) -->
+  <!-- Brazilian flag waving inside the bowl (the 'flag' you color) -->
   <g clip-path="url(#bowlClip)">
-    <path d="M30,35 q14,-5 28,0 t28,0 v9 q-14,5 -28,0 t-28,0 Z" fill="#ef4444"/>
-    <path d="M30,44 q14,-5 28,0 t28,0 v9 q-14,5 -28,0 t-28,0 Z" fill="#ffffff"/>
-    <path d="M30,53 q14,-5 28,0 t28,0 v9 q-14,5 -28,0 t-28,0 Z" fill="#22c55e"/>
-    <path d="M30,62 q14,-5 28,0 t28,0 v9 q-14,5 -28,0 t-28,0 Z" fill="#3b82f6"/>
+    <rect x="30" y="32" width="68" height="40" fill="#1eaa4f"/>
+    <polygon points="64,35 91,49 64,63 37,49" fill="#ffd400"/>
+    <circle cx="64" cy="49" r="8.4" fill="#1d3fb0"/>
+    <path d="M56.6,47.4 q7.4,-4 14.8,1.2" fill="none" stroke="#ffffff" stroke-width="1.7"/>
   </g>
+  <!-- bowl outline on top -->
   <path d="M31,26 h66 v8 c0,25 -13,38 -33,38 c-20,0 -33,-13 -33,-38 Z" fill="none" stroke="#d97706" stroke-width="2.5"/>
 
   <!-- stem, collar and base -->
@@ -48,9 +48,17 @@
   <rect x="42" y="91" width="44" height="9" rx="3.5" fill="url(#goldDark)"/>
   <rect x="36" y="100" width="56" height="10" rx="4" fill="#b45309"/>
 
-  <!-- soccer ball sidekick -->
-  <circle cx="99" cy="99" r="16" fill="#ffffff"/>
-  <path d="M99,90 l6.5,4.7 -2.5,7.6 h-8 l-2.5,-7.6 Z" fill="#0f172a"/>
-  <path d="M99,83.5 l3,4.2 -3,2.8 -3,-2.8 Z M86,96 l5,0.8 0.8,4.4 -4.4,2.2 Z M112,96 l-5,0.8 -0.8,4.4 4.4,2.2 Z M91.5,112 l2.2,-4.4 5.2,0.8 0.8,5 Z M106.5,112 l-2.2,-4.4 -5.2,0.8 -0.8,5 Z" fill="#0f172a"/>
-  <circle cx="99" cy="99" r="16" fill="none" stroke="#0f172a" stroke-width="2.5"/>
+  <!-- crayon, tipped toward the flag (implies coloring) -->
+  <g transform="translate(34,101) rotate(26)">
+    <rect x="-6.5" y="-2" width="13" height="27" rx="3.5" fill="#06b6d4" stroke="#0f172a" stroke-width="2"/>
+    <rect x="-6.5" y="8" width="13" height="6" fill="#0e7490"/>
+    <path d="M-6.5,-2 L0,-15 L6.5,-2 Z" fill="#a5f3fc" stroke="#0f172a" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M-2.3,-6.2 L0,-15 L2.3,-6.2 Z" fill="#0f172a"/>
+  </g>
+
+  <!-- soccer ball sidekick (soccer + world trivia) -->
+  <circle cx="100" cy="100" r="15" fill="#ffffff"/>
+  <path d="M100,91.5 l6.1,4.4 -2.35,7.1 h-7.5 l-2.35,-7.1 Z" fill="#0f172a"/>
+  <path d="M100,85.4 l2.8,3.9 -2.8,2.6 -2.8,-2.6 Z M87.8,97 l4.7,0.75 0.75,4.1 -4.1,2.05 Z M112.2,97 l-4.7,0.75 -0.75,4.1 4.1,2.05 Z M93,112 l2.05,-4.1 4.85,0.75 0.75,4.65 Z M107,112 l-2.05,-4.1 -4.85,0.75 -0.75,4.65 Z" fill="#0f172a"/>
+  <circle cx="100" cy="100" r="15" fill="none" stroke="#0f172a" stroke-width="2.5"/>
 </svg>
