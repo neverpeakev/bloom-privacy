@@ -1,9 +1,9 @@
 Color the Cup. Learn the World.
 
-WorldCopa turns 2026 soccer fever into the geography lesson your kids will actually ASK to play. Color every nation's flag, race the clock, and explore the world - one country at a time.
+WorldCopa turns a love of flags and soccer into the geography lesson your kids will actually ASK to play. Color every nation's flag, race the clock, and explore the world - one country at a time.
 
-COLOR ALL 48 TEAM FLAGS
-Paint each qualifying nation's flag region by region. Guided mode gently teaches the real colors; free-paint mode lets imaginations run wild. Every finished flag unlocks a fun fact and a burst of confetti.
+COLOR ALL 48 NATIONAL FLAGS
+Paint each nation's flag region by region. Guided mode gently teaches the real colors; free-paint mode lets imaginations run wild. Every finished flag unlocks a fun fact and a burst of confetti.
 
 GEOGRAPHY THAT FEELS LIKE A GAME
 - Trivia Arena: capitals, continents, languages and soccer lore, with a kid-friendly explanation after every answer
@@ -11,8 +11,8 @@ GEOGRAPHY THAT FEELS LIKE A GAME
 - Continent Quest: sort countries onto the right continent
 - Daily Challenge: a fresh quiz every day to build a streak
 
-FOLLOW THE WHOLE TOURNAMENT
-All 48 teams, every group, and the full match schedule across the host nations, plus a daily Matchday Challenge built from real fixtures.
+A SOCCER TEAM EXPLORER
+Meet 48 national teams, discover their flags, capitals and languages, and follow a fan-made calendar of publicly available match dates.
 
 KIDS BEG TO KEEP LEARNING
 Earn stars, collect country stamps, unlock badges and build daily streaks. Progress that turns "screen time" into "learning time."
@@ -24,6 +24,8 @@ PARENTS CAN RELAX
 - Built with COPPA principles, no personal data collected
 
 FREE TO START
-Play the Starter Pack free. Unlock all 48 flags, every game and the Matchday Challenge with WorldCopa Pro - weekly, yearly, or a one-time Lifetime unlock.
+Play the Starter Pack free. Unlock all 48 flags and every game with WorldCopa Pro - weekly, yearly, or a one-time Lifetime unlock.
 
 Color your way around the world.
+
+WorldCopa is an independent educational game. It is not affiliated with, endorsed by, or sponsored by FIFA or any tournament organizer. National flags are in the public domain.

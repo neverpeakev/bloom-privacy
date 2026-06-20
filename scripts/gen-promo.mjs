@@ -122,7 +122,7 @@ const cards = [
     out: 'store-assets/appstore-1-color.png',
     grad: 'linear-gradient(165deg,#4f46e5,#7c3aed 55%,#c026d3)',
     headline: 'COLOR EVERY<br/>TEAM FLAG',
-    sub: 'All 48 nations of 2026 ⚽🎨',
+    sub: 'All 48 national flags ⚽🎨',
     shot: b64('store-assets/raw-studio.png'),
     tilt: -3,
     emojis: ['🎨', '🖌️', '🇧🇷', '✨'],
@@ -190,7 +190,7 @@ await compose({
   <div class="left">
     <img class="icon" src="${icon}"/>
     <h1>World<span class="copa">Copa</span></h1>
-    <p>Color the Cup. Learn the World. ⚽🎨<br/>48 flags · trivia · the real 2026 schedule</p>
+    <p>Color the Cup. Learn the World. ⚽🎨<br/>48 flags · trivia · geography for kids</p>
   </div>
   <div class="shots">
     <img src="${b64('store-assets/raw-studio.png')}"/>

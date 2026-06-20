@@ -27,13 +27,13 @@ const PERIOD_LABEL = {
 
 const FEATURES = {
   free: ['12 starter flags to colour', 'Trivia with starter teams', 'Flag Match & Continent Quest (starter teams)', 'Daily streaks & badges'],
-  weekly: ['All 48 World Cup flags', 'Trivia about every team', 'Matchday Challenges with real fixtures', 'All badges & passport stamps'],
+  weekly: ['All 48 national flags', 'Trivia about every team', 'Matchday Challenges with real fixtures', 'All badges & passport stamps'],
   monthly: ['Everything in World Explorer', 'Best value for the whole tournament', 'No ads — ever (we never show ads to kids)', 'New event content as it lands'],
   family: ['Everything in Pro Unlock', 'Up to 6 family or classroom profiles*', 'Printable colouring sheets*', 'Teacher dashboard*'],
 };
 
 const PRO_PERKS = [
-  '🎨 All 48 World Cup flags to colour',
+  '🎨 All 48 national flags to colour',
   '🧠 Trivia & games with every team',
   '🏟️ Daily Matchday Challenges',
   '🛂 All badges & passport stamps',

@@ -1,5 +1,5 @@
 /**
- * World Cup hub: the 12 real groups, the full 104-match schedule and the
+ * Teams hub: the 12 groups, the full 104-match schedule and the
  * Matchday Challenge — a quiz built from each day's actual fixtures.
  */
 
@@ -158,7 +158,7 @@ export function render(root) {
 
   root.innerHTML = html`
     <header class="page-head">
-      <h1>⚽ World Cup 2026</h1>
+      <h1>⚽ Soccer 2026</h1>
       <p>48 teams · 12 groups · 104 matches across Canada, Mexico and the USA.</p>
     </header>
 
@@ -193,6 +193,11 @@ export function render(root) {
       )}
     </div>
     <section class="card match-list" data-schedule></section>
+
+    <p class="muted" style="font-size:0.8rem;text-align:center;margin:18px 6px 4px">
+      Independent fan calendar of publicly available match dates. WorldCopa is not
+      affiliated with, endorsed by, or sponsored by FIFA or any tournament organizer.
+    </p>
   `;
 
   const schedule = root.querySelector('[data-schedule]');

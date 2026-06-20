@@ -1,5 +1,5 @@
 /**
- * Home dashboard: hero, today's real World Cup matches, daily challenge,
+ * Home dashboard: hero, today's matches, daily challenge,
  * activity shortcuts and progress at a glance.
  */
 
@@ -50,7 +50,7 @@ export function render(root) {
       </div>
       <h1 class="hero-title">Color the Cup. <span class="hero-rainbow">Learn the World.</span></h1>
       <p class="hero-sub">
-        The Cup is here — color all 48 team flags, crush the trivia,
+        The tournament is here — color all 48 team flags, crush the trivia,
         and stamp your passport one country at a time. ⚽🎨
       </p>
       <div class="hero-cta">

@@ -150,7 +150,7 @@ export const BADGES = [
   { id: 'five-flags', emoji: '🖌️', name: 'Busy Brush', desc: 'Colour 5 flags.' },
   { id: 'fifteen-flags', emoji: '🌈', name: 'Rainbow Artist', desc: 'Colour 15 flags.' },
   { id: 'all-flags', emoji: '🏆', name: 'Flag Master', desc: 'Colour every single flag!' },
-  { id: 'group-complete', emoji: '⚽', name: 'Group Stage Hero', desc: 'Colour all 4 flags of one World Cup group.' },
+  { id: 'group-complete', emoji: '⚽', name: 'Group Stage Hero', desc: 'Colour all 4 flags of one tournament group.' },
   { id: 'perfect-quiz', emoji: '🧠', name: 'Brainiac', desc: 'Get a perfect score in a trivia round.' },
   { id: 'quiz-10', emoji: '❓', name: 'Question Hunter', desc: 'Answer 10 trivia questions correctly.' },
   { id: 'sharp-eye', emoji: '🔎', name: 'Sharp Eye', desc: 'Score 8+ in one Flag Match round.' },

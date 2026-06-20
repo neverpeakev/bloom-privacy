@@ -140,8 +140,8 @@ try {
   await page.waitForSelector('.result-score');
   check(true, 'continent quest completes to results');
 
-  // ── World Cup hub ───────────────────────────────────────────────────
-  console.log('▶ World Cup hub');
+  // ── Soccer / Teams hub ──────────────────────────────────────────────
+  console.log('▶ Soccer hub');
   await page.goto(BASE + '/index.html#/worldcup');
   await page.waitForSelector('.wc-groups');
   check((await page.locator('.wc-group').count()) === 12, '12 group cards');

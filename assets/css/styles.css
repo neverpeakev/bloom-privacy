@@ -410,7 +410,7 @@ main.view {
 .btn-continent.right { border-color: var(--grass-500); background: #dcfce7; }
 .btn-continent.wrong { border-color: var(--red-500); background: #fee2e2; }
 
-/* ── World Cup hub ───────────────────────────────────────────────── */
+/* ── Soccer hub ───────────────────────────────────────────────── */
 
 .wc-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
 .wc-group { margin: 0; }

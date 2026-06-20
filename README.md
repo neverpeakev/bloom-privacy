@@ -2,7 +2,7 @@
 
 **Color the Cup. Learn the World.** (formerly Flag Explorer 2026)
 
-A kid-friendly flag coloring and geography learning web app that turns World Cup 2026
+A kid-friendly flag coloring and geography learning web app that turns soccer 2026
 excitement into learning moments: color all 48 team flags region by region, master
 trivia about every country, match flags against the clock, sort countries onto
 continents, and follow the real tournament schedule with daily Matchday Challenges.
@@ -12,10 +12,10 @@ continents, and follow the real tournament schedule with daily Matchday Challeng
 | Area | What's inside |
 |---|---|
 | 🎨 **Coloring Studio** | All 48 qualified teams as paint-by-region SVG flags. Guided mode teaches the real colors; free-paint mode lets creativity run wild. Stars, confetti and fun facts on completion. |
-| 🧠 **Trivia Arena** | Generated questions about capitals, continents, languages, World Cup groups and football lore — with kid-friendly explanations after every answer. |
+| 🧠 **Trivia Arena** | Generated questions about capitals, continents, languages, soccer groups and football lore — with kid-friendly explanations after every answer. |
 | 🔎 **Flag Match** | Timed guess-the-flag rounds (10 flags, 12 seconds each). |
 | 🗺️ **Continent Quest** | Sort countries onto their continents; transcontinental countries (hi, Türkiye!) accept both answers. |
-| ⚽ **World Cup Hub** | The real 12 groups and full 104-match schedule (Canada · Mexico · USA), plus a daily **Matchday Challenge** quiz generated from that day's actual fixtures. |
+| ⚽ **Soccer Hub** | The real 12 groups and full 104-match schedule (Canada · Mexico · USA), plus a daily **Matchday Challenge** quiz generated from that day's actual fixtures. |
 | 🛂 **Passport** | Country stamps, 13 badges, streaks and stars — progress gamification throughout. |
 | 📅 **Daily Challenge** | One seeded quiz per calendar day (same questions for everyone), keeps streaks alive. |
 | 🔓 **Freemium tiers** | Starter Pack (12 free flags) → World Explorer $7.99/wk → Pro Unlock $39.99/mo → Family & Classroom $100/yr, with a 3-day trial. **Demo mode: no real payments** — plans unlock locally behind a parent gate. |
@@ -37,9 +37,9 @@ js/main.js            hash router + app chrome
 js/state.js           persisted store: streaks, stars, badges, plan gating (pure, testable)
 js/flags.js           flag geometry engine — 48 flags described as paintable SVG regions
 js/data/teams.js      48 teams + facts (capitals, languages, continents, football lore)
-js/data/matches.js    official 104-match schedule
+js/data/matches.js    104-match fan calendar (public match dates)
 js/games/questions.js trivia generators (pure, testable)
-js/views/*            home, coloring, games, world cup, passport, premium, grown-ups
+js/views/*            home, coloring, games, soccer hub, passport, premium, grown-ups
 sw.js                 offline-first service worker
 ```
 
@@ -80,5 +80,5 @@ npm install && npm run mobile:init && npm run mobile:ios   # → Xcode (Mac)
 
 ---
 
-*Match data: FIFA World Cup 2026 — 48 teams, 12 groups, 104 matches. Flags are
+*Match data: international soccer — 48 teams, 12 groups, 104 matches. Flags are
 lovingly simplified for small hands and remain the property of their nations. 🌍*

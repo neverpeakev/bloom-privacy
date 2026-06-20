@@ -1,7 +1,7 @@
 {
-  "name": "flag-explorer-2026",
+  "name": "worldcopa",
   "version": "1.0.0",
-  "description": "Interactive Flag Explorer — World Cup Edition. Color all 48 World Cup 2026 flags, master geography trivia and fill your passport.",
+  "description": "WorldCopa — color all 48 national flags, master geography trivia and fill your passport.",
   "type": "module",
   "private": true,
   "scripts": {
