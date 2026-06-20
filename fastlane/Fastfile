@@ -69,8 +69,32 @@ platform :ios do
     api_key = app_store_connect_api_key(
       key_id: ENV.fetch("ASC_KEY_ID"),
       issuer_id: ENV.fetch("ASC_ISSUER_ID"),
-      key_filepath: key_path
+      key_filepath: key_path,
+      set_spaceship_token: true            # needed for the Spaceship calls below
     )
+
+    # A rejection can leave a stale "review submission" container in progress.
+    # deliver refuses to create a new one while it exists ("A review submission
+    # is already in progress"), so cancel it first. Safe because the version is
+    # in PREPARE_FOR_SUBMISSION (not actively in review).
+    begin
+      app = Spaceship::ConnectAPI::App.find(ENV.fetch("ASC_APP_BUNDLE_ID", "com.neverpeak.flagexplorer"))
+      platform = Spaceship::ConnectAPI::Platform::IOS
+      stale = app&.get_in_progress_review_submission(platform: platform)
+      if stale
+        UI.important("Canceling stale in-progress review submission #{stale.id} so we can resubmit")
+        stale.cancel_submission
+        10.times do
+          break if app.get_in_progress_review_submission(platform: platform).nil?
+          sleep(3)
+        end
+        UI.message("Stale review submission cleared")
+      else
+        UI.message("No in-progress review submission to clear")
+      end
+    rescue => e
+      UI.error("Could not auto-clear an existing review submission (continuing): #{e.message}")
+    end
 
     deliver(
       api_key: api_key,
