@@ -56,6 +56,9 @@ try {
   // ── Colour France end-to-end (3 regions, guided mode) ──────────────
   console.log('▶ Coloring studio — France');
   await page.goto(BASE + '/index.html#/color/FRA');
+  await page.waitForSelector('.paint-canvas');              // brush is the default surface on first visit
+  check(await page.locator('.paint-canvas').isVisible(), 'brush canvas is the default colouring surface');
+  await page.click('[data-mode-btn="fill"]');               // switch to tap-to-fill for this test
   await page.waitForSelector('.studio-svg');
   const regions = await page.evaluate(async () => {
     const { FLAGS } = await import('./js/flags.js');
@@ -81,13 +84,14 @@ try {
   // Wrong colour wobbles & counts a mistake
   console.log('▶ Guided mode mistake handling — Japan');
   await page.goto(BASE + '/index.html#/color/JPN');
+  await page.click('[data-mode-btn="fill"]');
   await page.waitForSelector('.studio-svg');
   const jpn = await page.evaluate(async () => {
     const { FLAGS } = await import('./js/flags.js');
     return FLAGS.JPN.regions.map((r) => ({ id: r.id, color: r.color }));
   });
   const wrongColor = await page.evaluate(async () => {
-    const sw = [...document.querySelectorAll('.swatch')].find(
+    const sw = [...document.querySelectorAll('.swatch[data-color]')].find(
       (s) => !['#ffffff', '#bc002d'].includes(s.dataset.color),
     );
     return sw?.dataset.color;
@@ -99,6 +103,23 @@ try {
     () => JSON.parse(localStorage.getItem('flagexplorer.v1')).coloring.JPN.mistakes,
   );
   check(mistakes === 1, 'wrong colour recorded as mistake');
+
+  // ── Brush mode: finger-paint a flag inside the lines ────────────────
+  console.log('▶ Brush colouring — Germany');
+  await page.goto(BASE + '/index.html#/color/GER');
+  await page.click('[data-mode-btn="brush"]');              // prior test persisted fill mode; pick brush
+  await page.waitForSelector('.paint-canvas');
+  check(await page.locator('.paint-lines svg').count() === 1, 'region outline overlay renders');
+  await page.uncheck('[data-guided]');                       // free-paint: any colour completes a region
+  const lockedRegions = await page.evaluate(() => {
+    window.__paint.fillRegion(0);                            // colour the whole flag via the engine hook
+    return window.__paint.lockedCount();
+  });
+  check(lockedRegions >= 1, `brush coloured and locked regions (${lockedRegions})`);
+  await page.waitForSelector('.finish-modal', { timeout: 5000 });
+  check(true, 'brush colouring reaches the finish modal');
+  await shot(page, 'brush-finished');
+  await page.keyboard.press('Escape');
 
   // ── Trivia round ────────────────────────────────────────────────────
   console.log('▶ Trivia');
@@ -201,7 +222,8 @@ try {
   await page.waitForSelector('.hero-title');
   await shot(page, 'mobile-home');
   await page.goto(BASE + '/index.html#/color/BRA');
-  await page.waitForSelector('.studio-svg');
+  await page.click('[data-mode-btn="brush"]');
+  await page.waitForSelector('.paint-canvas');
   await shot(page, 'mobile-studio');
 
   // ── Privacy page ────────────────────────────────────────────────────

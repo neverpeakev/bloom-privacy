@@ -12,6 +12,7 @@ import { get, save, addStars, addStamp, evaluateBadges, isFlagUnlocked, seededRn
 import { html, raw, esc, toast, modal, showBadges, shuffled } from '../ui.js';
 import { sfx } from '../audio.js';
 import { celebrate } from '../confetti.js';
+import { createBrushStudio } from '../paint.js';
 
 // ── Gallery ────────────────────────────────────────────────────────────
 
@@ -71,6 +72,10 @@ function renderStudio(root, code) {
   const palette = shuffled(paletteWithDecoys(code, rng), rng);
   let selected = palette[0];
   let guided = s.settings.guided;
+  let mode = s.settings.paintMode === 'fill' ? 'fill' : 'brush'; // brush is the default
+  let brushSize = 16;
+  let erasing = false;
+  let brush = null; // active brush engine in brush mode
   let locked = new Set(
     Object.entries(saveSlot.fills)
       .filter(([id, c]) => spec.regions.find((r) => r.id === id)?.color === c)
@@ -87,9 +92,14 @@ function renderStudio(root, code) {
       </label>
     </header>
 
-    <section class="studio">
+    <section class="studio" data-mode="${mode}">
       <div class="studio-canvas" data-canvas></div>
       <div class="studio-side">
+        <div class="mode-switch" role="tablist" aria-label="Colouring mode">
+          <button class="mode-btn ${mode === 'brush' ? 'active' : ''}" data-mode-btn="brush">🖌️ Brush</button>
+          <button class="mode-btn ${mode === 'fill' ? 'active' : ''}" data-mode-btn="fill">🪣 Fill</button>
+        </div>
+
         <div class="palette" role="toolbar" aria-label="Colour palette">
           ${raw(
             palette
@@ -100,7 +110,19 @@ function renderStudio(root, code) {
               )
               .join(''),
           )}
+          <label class="swatch swatch-custom" title="Pick any colour">
+            <input type="color" data-custom value="${selected.color}" aria-label="Custom colour" />
+          </label>
         </div>
+
+        <div class="brush-only brush-tools">
+          <label class="brush-size">
+            <span>Brush</span>
+            <input type="range" min="6" max="40" value="${brushSize}" data-brush />
+          </label>
+          <button class="btn btn-ghost btn-sm" data-erase aria-pressed="false">🩹 Eraser</button>
+        </div>
+
         <div class="studio-progress">
           <div class="progress-bar"><div class="progress-fill" data-fill></div></div>
           <span data-count></span>
@@ -117,7 +139,18 @@ function renderStudio(root, code) {
   `;
 
   const canvas = root.querySelector('[data-canvas]');
+  const studioEl = root.querySelector('.studio');
 
+  function updateProgress() {
+    const total = spec.regions.length;
+    const ids = new Set(spec.regions.map((r) => r.id));
+    const done = Object.keys(saveSlot.fills).filter((id) => ids.has(id)).length;
+    root.querySelector('[data-fill]').style.width = `${(done / total) * 100}%`;
+    root.querySelector('[data-count]').textContent = `${done} / ${total} regions`;
+    return done === total;
+  }
+
+  // ── Fill mode: tap a region to flood-fill it (original behaviour) ──────
   function paintSVG() {
     canvas.innerHTML = flagSVG(code, { mode: 'outline', fills: saveSlot.fills, cls: 'studio-svg' });
     const svg = canvas.querySelector('svg');
@@ -135,14 +168,43 @@ function renderStudio(root, code) {
     });
   }
 
-  function updateProgress() {
-    const total = spec.regions.length;
-    const done = guided
-      ? locked.size
-      : Object.keys(saveSlot.fills).filter((id) => spec.regions.some((r) => r.id === id)).length;
-    root.querySelector('[data-fill]').style.width = `${(done / total) * 100}%`;
-    root.querySelector('[data-count]').textContent = `${done} / ${total} regions`;
-    return done === total;
+  // ── Brush mode: finger-paint inside the lines ─────────────────────────
+  function setupBrush() {
+    if (brush) { brush.destroy(); brush = null; }
+    brush = createBrushStudio({
+      container: canvas,
+      spec,
+      getColor: () => selected,
+      getBrush: () => brushSize,
+      getErasing: () => erasing,
+      getGuided: () => guided,
+      initialFills: { ...saveSlot.fills },
+      onLock: (regionId, color) => {
+        saveSlot.fills[regionId] = color;
+        locked.add(regionId);
+        sfx.paint();
+        save();
+        if (updateProgress()) finish();
+      },
+      onUnlock: (regionId) => {
+        delete saveSlot.fills[regionId];
+        locked.delete(regionId);
+        save();
+        updateProgress();
+      },
+      onProgress: updateProgress,
+      onHint: (msg) => toast(msg, { emoji: '🤔', ms: 1500 }),
+    });
+  }
+
+  function setStage() {
+    studioEl.dataset.mode = mode;
+    if (brush) { brush.destroy(); brush = null; }
+    canvas.innerHTML = '';
+    canvas.classList.toggle('is-brush', mode === 'brush');
+    if (mode === 'brush') setupBrush();
+    else paintSVG();
+    updateProgress();
   }
 
   function finish() {
@@ -209,14 +271,54 @@ function renderStudio(root, code) {
     if (updateProgress()) finish();
   }
 
-  // Palette selection
-  root.querySelectorAll('.swatch').forEach((sw) => {
+  function pickColor(color, name) {
+    erasing = false;
+    root.querySelector('[data-erase]')?.setAttribute('aria-pressed', 'false');
+    selected = { color, name: name || 'Custom' };
+    const picker = root.querySelector('[data-custom]');
+    if (picker) picker.value = color;
+  }
+
+  // Palette selection (the custom-colour input is handled separately)
+  root.querySelectorAll('.swatch[data-color]').forEach((sw) => {
     sw.addEventListener('click', () => {
       root.querySelectorAll('.swatch').forEach((x) => x.classList.remove('selected'));
       sw.classList.add('selected');
-      selected = { color: sw.dataset.color, name: sw.title };
+      pickColor(sw.dataset.color, sw.title);
       sfx.tap();
     });
+  });
+
+  // Custom colour picker
+  root.querySelector('[data-custom]')?.addEventListener('input', (e) => {
+    root.querySelectorAll('.swatch').forEach((x) => x.classList.remove('selected'));
+    e.target.closest('.swatch')?.classList.add('selected');
+    pickColor(e.target.value, 'Custom');
+  });
+
+  // Mode switch (Brush / Fill)
+  root.querySelectorAll('[data-mode-btn]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (mode === btn.dataset.modeBtn) return;
+      mode = btn.dataset.modeBtn;
+      get().settings.paintMode = mode;
+      save();
+      root.querySelectorAll('[data-mode-btn]').forEach((b) => b.classList.toggle('active', b === btn));
+      setStage();
+      sfx.tap();
+    });
+  });
+
+  // Brush size
+  root.querySelector('[data-brush]')?.addEventListener('input', (e) => {
+    brushSize = Number(e.target.value);
+  });
+
+  // Eraser toggle
+  root.querySelector('[data-erase]')?.addEventListener('click', (e) => {
+    erasing = !erasing;
+    e.currentTarget.setAttribute('aria-pressed', String(erasing));
+    e.currentTarget.classList.toggle('active', erasing);
   });
 
   // Guided toggle
@@ -234,17 +336,19 @@ function renderStudio(root, code) {
     saveSlot.mistakes = 0;
     locked = new Set();
     save();
-    paintSVG();
-    updateProgress();
+    setStage();
     toast('Fresh start — happy painting!', { emoji: '🧽' });
   });
 
-  paintSVG();
-  updateProgress();
+  setStage();
+
+  return () => {
+    if (brush) { brush.destroy(); brush = null; }
+    if (typeof window !== 'undefined') delete window.__paint;
+  };
 }
 
 export function render(root, args = []) {
   const code = args[0];
-  if (code) renderStudio(root, code);
-  else renderGallery(root);
+  return code ? renderStudio(root, code) : renderGallery(root);
 }
