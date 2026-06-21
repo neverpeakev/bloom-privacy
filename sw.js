@@ -1,6 +1,6 @@
 /* WorldCopa — offline-first service worker. */
 
-const CACHE = 'worldcopa-v2';
+const CACHE = 'worldcopa-v3';
 
 const ASSETS = [
   './',
@@ -14,6 +14,8 @@ const ASSETS = [
   './js/audio.js',
   './js/confetti.js',
   './js/flags.js',
+  './js/paint.js',
+  './js/paint-logic.js',
   './js/data/teams.js',
   './js/data/matches.js',
   './js/games/questions.js',

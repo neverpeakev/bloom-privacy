@@ -329,6 +329,45 @@ main.view {
 }
 .swatch[style*="#ffffff"] { border-color: var(--ink-300); }
 
+/* ── Brush colouring (finger painting) ───────────────────────────── */
+.studio-canvas.is-brush { padding: 12px; }
+.paint-wrap {
+  position: relative; width: 100%; aspect-ratio: 3 / 2; max-height: 64vh; margin: 0 auto;
+}
+.paint-canvas, .paint-lines {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block; border-radius: 8px;
+}
+.paint-canvas { background: #fff; touch-action: none; cursor: crosshair; z-index: 1; }
+.paint-lines { pointer-events: none; z-index: 2; }
+.paint-lines svg { width: 100%; height: 100%; display: block; }
+
+.mode-switch {
+  display: flex; gap: 6px; background: var(--card); padding: 6px;
+  border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.mode-btn {
+  flex: 1; border: none; background: transparent; padding: 9px; border-radius: 10px;
+  font-weight: 800; cursor: pointer; font-size: 0.92rem; color: #475569;
+}
+.mode-btn.active { background: #7c3aed; color: #fff; }
+
+.swatch-custom {
+  display: grid; place-items: center; padding: 0; overflow: hidden;
+  background: conic-gradient(red, orange, yellow, lime, aqua, blue, magenta, red);
+}
+.swatch-custom input[type="color"] {
+  opacity: 0; width: 150%; height: 150%; cursor: pointer; border: none; padding: 0;
+}
+
+.brush-tools {
+  display: flex; align-items: center; gap: 10px; background: var(--card);
+  padding: 10px 12px; border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.brush-size { display: flex; align-items: center; gap: 8px; flex: 1; font-weight: 700; font-size: 0.85rem; }
+.brush-size input[type="range"] { flex: 1; min-width: 0; }
+[data-erase].active { outline: 2px solid #7c3aed; outline-offset: 1px; }
+.studio[data-mode="fill"] .brush-only { display: none; }
+
 .studio-progress { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.88rem; }
 .studio-progress .progress-bar { flex: 1; }
 .studio-actions { display: flex; gap: 8px; }
